@@ -10,7 +10,7 @@ require recipes-ccsp/ccsp/ccsp_common.inc
 
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
-SRC_URI = "git://git@github.com/rdkcentral/RdkWanManager.git;branch=main;protocol=https;name=WanManager"
+SRC_URI = "git://git@github.com/rdkcentral/RdkWanManager.git;branch=IpAddress_TR181_impl_UnitTest;protocol=https;name=WanManager"
 SRCREV = "${AUTOREV}"
 
 
