@@ -8,12 +8,9 @@ DEPENDS = "ccsp-common-library dbus rdk-logger utopia halinterface libunpriv"
 
 require recipes-ccsp/ccsp/ccsp_common.inc
 
-SRC_URI = "git://git@github.com/rdkcentral/RdkPppManager.git;branch=main;protocol=https;name=PppManager"
-SRCREV = "v1.0.0"
-
-SRCREV_FORMAT = "PppManager"
-
-PV = "${RDK_RELEASE}+git${SRCPV}"
+GIT_TAG = "v1.0.0"
+SRC_URI := "git://github.com/rdkcentral/RdkPppManager.git;branch=main;protocol=https;name=PppManager;tag=${GIT_TAG}"
+PV = "${GIT_TAG}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -43,6 +40,7 @@ do_install_append () {
     install -d ${D}${exec_prefix}/rdk/pppmanager
     ln -sf ${bindir}/pppmanager ${D}${exec_prefix}/rdk/pppmanager/pppmanager
     install -m 644 ${S}/config/RdkPppManager.xml ${D}/usr/rdk/pppmanager/
+    echo "sha value for recipe " + ${SRCREV_PppManager}
 }
 
 
