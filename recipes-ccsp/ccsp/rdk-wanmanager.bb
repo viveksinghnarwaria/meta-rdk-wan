@@ -10,7 +10,7 @@ require recipes-ccsp/ccsp/ccsp_common.inc
 
 PV = "${RDK_RELEASE}+git${SRCPV}"
 SRC_URI = "git://git@github.com/rdkcentral/RdkWanManager.git;branch=WM_2_0_0;protocol=https;name=WanManager"
-SRCREV = "v2.0.2"
+SRCREV = "v2.0.3"
 
 
 SRCREV_FORMAT = "WanManager"
