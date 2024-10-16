@@ -35,13 +35,12 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEn
 PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 # Define a variable to consolidate the check for MAPT features based on DISTRO_FEATURES
-#MAPT_FEATURE_ENABLED = "${@bb.utils.contains('DISTRO_FEATURES', 'feature_mapt','true', bb.utils.contains('DISTRO_FEATURES', 'nat46', 'true', 'false', d), d)}"
-MAPT_FEATURE_ENABLED = "${@bb.utils.contains('DISTRO_FEATURES', 'WanManagerUnificationEnable', bb.utils.contains('DISTRO_FEATURES', 'nat46', 'true', 'false', d), 'false', d) == 'true' or bb.utils.contains('DISTRO_FEATURES', 'feature_mapt', 'true', 'false', d) == 'true'}"
+MAPT_FEATURE_ENABLED = "${@bb.utils.contains('DISTRO_FEATURES', 'feature_mapt','true', bb.utils.contains('DISTRO_FEATURES', 'unified_mapt', 'true', 'false', d), d)}"
 
 # Use the variable in CFLAGS_append
-CFLAGS_append += " ${@'${MAPT_FEATURE_ENABLED}' == 'True' and '-DFEATURE_MAPT' or ''}"
-CFLAGS_append += " ${@'${MAPT_FEATURE_ENABLED}' == 'True' and '-DFEATURE_MAPT_DEBUG' or ''}"
-CFLAGS_append += " ${@'${MAPT_FEATURE_ENABLED}' == 'True' and '-DNAT46_KERNEL_SUPPORT' or ''}"
+CFLAGS_append += " ${@'${MAPT_FEATURE_ENABLED}' == 'true' and '-DFEATURE_MAPT' or ''}"
+CFLAGS_append += " ${@'${MAPT_FEATURE_ENABLED}' == 'true' and '-DFEATURE_MAPT_DEBUG' or ''}"
+CFLAGS_append += " ${@'${MAPT_FEATURE_ENABLED}' == 'true' and '-DNAT46_KERNEL_SUPPORT' or ''}"
 
 LDFLAGS += " -lprivilege -lpthread -lstdc++"
 
@@ -66,7 +65,7 @@ do_compile_prepend () {
     sed -i '2i <?define RBUS_BUILD_FLAG_ENABLE=True?>' ${S}/config/${XML_NAME}
     fi
 
-    if [ "${MAPT_FEATURE_ENABLED}" = "True" ]; then
+    if [ "${MAPT_FEATURE_ENABLED}" = "true" ]; then
         sed -i '2i <?define FEATURE_MAPT=True?>' ${S}/config/${XML_NAME}
     fi
 
